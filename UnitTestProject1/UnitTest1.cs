@@ -10,7 +10,7 @@ namespace UnitTestProject1
         [TestMethod]
         public void Le_Nom_Technicien_Doit_S_Appeler_Felix()
         {
-            var tech = new Technicien();
+            var tech = new ();
             tech.Nom = "Felix";
 
             Assert.AreEqual("Felix", tech.Nom);
