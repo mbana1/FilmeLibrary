@@ -52,7 +52,7 @@ namespace FilmeLibrary
            
         }
 
-        public Personne(string nom, int id, string prenom, DateTime dateNaissance, string adresse, string ville, string codePostale, decimal taille,decimal poids)
+        public Personne(int id, string nom, string prenom, DateTime dateNaissance, string adresse, string ville, string codePostale, decimal taille,decimal poids)
         {
             Nom = nom;
             Id = id;

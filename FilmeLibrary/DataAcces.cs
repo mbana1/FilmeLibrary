@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.SqlClient;
 using FilmeLibrary;
+using System.Collections.Generic;
 
 namespace FilmeShop
 {
@@ -53,28 +54,32 @@ namespace FilmeShop
 
         }
 
-        public static void GetAllPersonne()
+        public static List<Personne>GetAllPersonne()
         {
+            List<Personne> liste = new List<Personne>();
+
             using (SqlConnection connection = new SqlConnection(DataAcces.CHEMINBDD))
             {
+              
                 connection.Open();
 
                 SqlCommand RecuperePersonne = connection.CreateCommand();
-                RecuperePersonne.CommandText = "SELECT IDPersonne,NomPersonne,PrenonPersonne,DateDenaissance,Adresse,Ville,CodePostal,Taille,Poids,Age From Personne";               
+                RecuperePersonne.CommandText = "SELECT IDPersonne,NomPersonne,PrenonPersonne,DateDenaissance,Adresse,Ville,CodePostal,Taille,Poids From Personne";               
                 RecuperePersonne.ExecuteNonQuery();
                 SqlDataReader dataReader = RecuperePersonne.ExecuteReader();
                 while (dataReader.Read())
                 {
+                    Personne personne = new Personne((int)dataReader["IDPersonne"], (string)dataReader["NomPersonne"], (string)dataReader["PrenonPersonne"], (DateTime)dataReader["DateDenaissance"], (string)dataReader["Adresse"], (string)dataReader["Ville"], (string)dataReader["CodePostal"], (Decimal)dataReader["Taille"], (Decimal)dataReader["Poids"]);
 
 
-
-
+                    liste.Add(personne);
 
 
                 }
                 connection.Close();
             }
 
+            return liste;
         }
 
 
